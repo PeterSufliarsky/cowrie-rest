@@ -1,4 +1,4 @@
-package sk.sufliarsky.peter.honeypot.cowrierest;
+package sk.sufliarsky.peter.cowrierest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

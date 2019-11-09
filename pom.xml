@@ -8,16 +8,15 @@
 		<version>2.1.4.RELEASE</version>
 		<relativePath/>
 	</parent>
-	<groupId>sk.sufliarsky.peter.honeypot</groupId>
+	<groupId>sk.sufliarsky.peter</groupId>
 	<artifactId>cowrie-rest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>Cowrie REST</name>
 	<description>REST API serving data collected by the Cowrie honeypot</description>
 
 	<properties>
-		<java.version>1.8</java.version>
-		<maven.test.skip>true</maven.test.skip>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -47,7 +46,6 @@
 	</dependencies>
 
 	<build>
-        	<finalName>cowrie-rest</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

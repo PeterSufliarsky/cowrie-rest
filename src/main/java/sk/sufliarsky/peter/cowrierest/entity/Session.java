@@ -1,9 +1,6 @@
-package sk.sufliarsky.peter.honeypot.cowrierest.entity;
+package sk.sufliarsky.peter.cowrierest.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,23 +8,38 @@ import java.time.LocalDateTime;
 public class Session {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     String id;
 
-    @Column(name="starttime")
+    @Column(name = "starttime", nullable = false)
     LocalDateTime startTime;
 
-    @Column(name="endtime")
+    @Column(name = "endtime")
     LocalDateTime endTime;
 
-    // Sensor sensor;
+    @ManyToOne()
+    @JoinColumn(name = "sensor", nullable = false)
+    Sensor sensor;
 
-    @Column(name="ip")
+    @Column(name = "ip", nullable = false)
     String ip;
 
-    @Column(name="termsize")
+    @Column(name = "termsize")
     String termSize;
 
-    // Client client;
+    @ManyToOne()
+    @JoinColumn(name="client")
+    Client client;
+
+    protected Session() {}
+
+    public Session(
+            LocalDateTime startTime,
+            LocalDateTime endTime,
+            Sensor sensor,
+            String ip,
+            String termSize,
+            Client client) {}
 
     public String getId() {
         return id;
@@ -52,7 +64,7 @@ public class Session {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-/*
+
     public Sensor getSensor() {
         return sensor;
     }
@@ -60,7 +72,7 @@ public class Session {
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
-*/
+
     public String getIp() {
         return ip;
     }
@@ -76,7 +88,7 @@ public class Session {
     public void setTermSize(String termSize) {
         this.termSize = termSize;
     }
-/*
+
     public Client getClient() {
         return client;
     }
@@ -84,5 +96,5 @@ public class Session {
     public void setClient(Client client) {
         this.client = client;
     }
- */
+
 }
