@@ -58,22 +58,16 @@ GET /sessions?date=20191108
 ## Build and deployment
 
 1. Clone the repository
+2. Configure the database access in src/main/resources/application.properties
+3. From the project directory run
 ```
-git clone https://github.com/PeterSufliarsky/cowrie-rest/
+mvn spring-boot:run
 ```
-2. Move to the project directory
-```
-cd cowrie-rest
-```
-3. Build with maven:
+4. By default, the API is running on port 8080
+5. (optional) Build a war file which you can deploy with Apache Tomcat
 ```
 mvn clean package
 ```
-4. Run
-```
-java -jar target/cowrie-rest-*.jar
-```
-5. By default, the API is available on port 8080
 
 ## TODO
 - [ ] Provide further data from the honeypot
