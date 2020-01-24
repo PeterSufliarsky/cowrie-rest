@@ -3,7 +3,9 @@ package sk.sufliarsky.peter.cowrierest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sk.sufliarsky.peter.cowrierest.entity.Auth;
 import sk.sufliarsky.peter.cowrierest.entity.Session;
+import sk.sufliarsky.peter.cowrierest.service.AuthService;
 import sk.sufliarsky.peter.cowrierest.service.SessionService;
 
 import java.util.Collections;
@@ -13,6 +15,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping(path="/sessions")
 public class SessionController {
+
+    @Autowired
+    private AuthService authService;
 
     @Autowired
     private SessionService sessionService;
@@ -42,5 +47,10 @@ public class SessionController {
             return Collections.emptyList();
         }
 
+    }
+
+    @GetMapping(path=("/{id}/auth"))
+    public @ResponseBody List<Auth> getAuth(@PathVariable String id) {
+        return authService.findBySessionId(id);
     }
 }
