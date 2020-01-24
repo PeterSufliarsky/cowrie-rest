@@ -32,5 +32,4 @@ public class Sensor {
     public void setId(String ip) {
         this.ip = ip;
     }
-
 }

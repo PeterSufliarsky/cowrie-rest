@@ -10,7 +10,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "version", nullable = false)
+    @Column(name="version")
     String version;
 
     protected Client() {}
@@ -32,5 +32,4 @@ public class Client {
     public void setVersion(String version) {
         this.version = version;
     }
-
 }

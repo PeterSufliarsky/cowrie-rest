@@ -1,5 +1,8 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -11,24 +14,25 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.AUTO)
     String id;
 
-    @Column(name = "starttime", nullable = false)
+    @Column(name="starttime", nullable = false)
     LocalDateTime startTime;
 
-    @Column(name = "endtime")
+    @Column(name="endtime")
     LocalDateTime endTime;
 
-    @ManyToOne()
-    @JoinColumn(name = "sensor", nullable = false)
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="sensor", nullable = false)
     Sensor sensor;
 
-    @Column(name = "ip", nullable = false)
+    @Column(name="ip", nullable = false)
     String ip;
 
-    @Column(name = "termsize")
+    @Column(name="termsize")
     String termSize;
 
-    @ManyToOne()
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="client")
+    @NotFound(action = NotFoundAction.IGNORE)
     Client client;
 
     protected Session() {}
@@ -96,5 +100,4 @@ public class Session {
     public void setClient(Client client) {
         this.client = client;
     }
-
 }

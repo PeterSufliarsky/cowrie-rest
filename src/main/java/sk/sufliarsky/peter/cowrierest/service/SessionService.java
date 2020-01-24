@@ -1,6 +1,5 @@
 package sk.sufliarsky.peter.cowrierest.service;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.sufliarsky.peter.cowrierest.entity.Session;

@@ -9,5 +9,4 @@ public class CowrieRestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CowrieRestApplication.class, args);
 	}
-
 }
