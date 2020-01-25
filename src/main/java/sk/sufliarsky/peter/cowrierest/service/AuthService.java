@@ -13,7 +13,7 @@ public class AuthService {
     @Autowired
     private AuthRepository authRepository;
 
-    public List<Auth> findBySessionId(String sessionId) {
-        return authRepository.findBySessionId(sessionId);
+    public List<Auth> getAuthForSession(String sessionId) {
+        return authRepository.findBySession(sessionId);
     }
 }

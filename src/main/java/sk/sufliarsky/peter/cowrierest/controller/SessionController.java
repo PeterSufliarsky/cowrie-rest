@@ -56,11 +56,11 @@ public class SessionController {
 
     @GetMapping(path=("/{id}/auth"))
     public @ResponseBody List<Auth> getAuth(@PathVariable String id) {
-        return authService.findBySessionId(id);
+        return authService.getAuthForSession(id);
     }
 
     @GetMapping(path=("/{id}/params"))
     public @ResponseBody Params getParams(@PathVariable String id) {
-        return paramsService.findBySessionId(id);
+        return paramsService.getParamsForSession(id);
     }
 }

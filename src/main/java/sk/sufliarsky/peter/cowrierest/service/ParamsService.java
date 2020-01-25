@@ -11,7 +11,7 @@ public class ParamsService {
     @Autowired
     private ParamsRepository paramsRepository;
 
-    public Params findBySessionId(String sessionId) {
-        return paramsRepository.findBySessionId(sessionId);
+    public Params getParamsForSession(String sessionId) {
+        return paramsRepository.findBySession(sessionId);
     }
 }
