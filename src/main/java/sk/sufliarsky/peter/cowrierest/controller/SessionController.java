@@ -27,6 +27,9 @@ public class SessionController {
     IPForwardsService ipForwardsService;
 
     @Autowired
+    IPForwardsDataService ipForwardsDataService;
+
+    @Autowired
     KeyFingerprintsService keyFingerprintsService;
 
     @Autowired
@@ -84,6 +87,11 @@ public class SessionController {
     @GetMapping(path=("/{id}/ipforwards"))
     public @ResponseBody List<IPForward> getIpForwards(@PathVariable String id) {
         return ipForwardsService.getIpForwardsForSession(id);
+    }
+
+    @GetMapping(path=("/{id}/ipforwardsdata"))
+    public @ResponseBody List<IPForwardData> getIpForwardsData(@PathVariable String id) {
+        return ipForwardsDataService.getIpForwardsDataForSession(id);
     }
 
     @GetMapping(path=("/{id}/keyfingerprints"))
