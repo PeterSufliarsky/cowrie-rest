@@ -3,14 +3,8 @@ package sk.sufliarsky.peter.cowrierest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import sk.sufliarsky.peter.cowrierest.entity.Auth;
-import sk.sufliarsky.peter.cowrierest.entity.Download;
-import sk.sufliarsky.peter.cowrierest.entity.Params;
-import sk.sufliarsky.peter.cowrierest.entity.Session;
-import sk.sufliarsky.peter.cowrierest.service.AuthService;
-import sk.sufliarsky.peter.cowrierest.service.DownloadService;
-import sk.sufliarsky.peter.cowrierest.service.ParamsService;
-import sk.sufliarsky.peter.cowrierest.service.SessionService;
+import sk.sufliarsky.peter.cowrierest.entity.*;
+import sk.sufliarsky.peter.cowrierest.service.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +19,9 @@ public class SessionController {
 
     @Autowired
     private DownloadService downloadService;
+
+    @Autowired
+    KeyFingerprintsService keyFingerprintsService;
 
     @Autowired
     private ParamsService paramsService;
@@ -62,6 +59,11 @@ public class SessionController {
     @GetMapping(path=("/{id}/auth"))
     public @ResponseBody List<Auth> getAuth(@PathVariable String id) {
         return authService.getAuthForSession(id);
+    }
+
+    @GetMapping(path=("/{id}/keyfingerprints"))
+    public @ResponseBody List<KeyFingerprint> getKeyFingerprints(@PathVariable String id) {
+        return keyFingerprintsService.getKeyFingerprintsForSession(id);
     }
 
     @GetMapping(path=("/{id}/params"))
