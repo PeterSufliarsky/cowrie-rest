@@ -21,6 +21,9 @@ public class SessionController {
     private DownloadsService downloadsService;
 
     @Autowired
+    InputService inputService;
+
+    @Autowired
     KeyFingerprintsService keyFingerprintsService;
 
     @Autowired
@@ -65,6 +68,11 @@ public class SessionController {
     public @ResponseBody
     List<Download> getDownloads(@PathVariable String id) {
         return downloadsService.getDownloadsForSession(id);
+    }
+
+    @GetMapping(path=("/{id}/input"))
+    public @ResponseBody List<Input> getInput(@PathVariable String id) {
+        return inputService.getInputForSession(id);
     }
 
     @GetMapping(path=("/{id}/keyfingerprints"))
