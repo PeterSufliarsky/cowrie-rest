@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.sufliarsky.peter.cowrierest.entity.Auth;
+import sk.sufliarsky.peter.cowrierest.entity.Download;
 import sk.sufliarsky.peter.cowrierest.entity.Params;
 import sk.sufliarsky.peter.cowrierest.entity.Session;
 import sk.sufliarsky.peter.cowrierest.service.AuthService;
+import sk.sufliarsky.peter.cowrierest.service.DownloadService;
 import sk.sufliarsky.peter.cowrierest.service.ParamsService;
 import sk.sufliarsky.peter.cowrierest.service.SessionService;
 
@@ -20,6 +22,9 @@ public class SessionController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private DownloadService downloadService;
 
     @Autowired
     private ParamsService paramsService;
@@ -62,5 +67,11 @@ public class SessionController {
     @GetMapping(path=("/{id}/params"))
     public @ResponseBody Params getParams(@PathVariable String id) {
         return paramsService.getParamsForSession(id);
+    }
+
+    @GetMapping(path=("/{id}/downloads"))
+    public @ResponseBody
+    List<Download> getDownloads(@PathVariable String id) {
+        return downloadService.getDownloadsForSession(id);
     }
 }
