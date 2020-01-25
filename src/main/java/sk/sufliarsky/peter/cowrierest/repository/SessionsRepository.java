@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface SessionRepository extends JpaRepository<Session, String> {
+public interface SessionsRepository extends JpaRepository<Session, String> {
 
     @Query("SELECT s FROM Session s WHERE s.startTime >= :dayStart and s.endTime < :dayEnd")
     List<Session> findFromDay(@Param("dayStart") LocalDateTime dayStart, @Param("dayEnd") LocalDateTime dayEnd);

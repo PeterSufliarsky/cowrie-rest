@@ -18,7 +18,7 @@ public class SessionController {
     private AuthService authService;
 
     @Autowired
-    private DownloadService downloadService;
+    private DownloadsService downloadsService;
 
     @Autowired
     KeyFingerprintsService keyFingerprintsService;
@@ -27,26 +27,26 @@ public class SessionController {
     private ParamsService paramsService;
 
     @Autowired
-    private SessionService sessionService;
+    private SessionsService sessionsService;
 
     @GetMapping(path=("/{id}"))
     public @ResponseBody Optional<Session> getSession(@PathVariable String id) {
-        return sessionService.getSession(id);
+        return sessionsService.getSession(id);
     }
 
     @GetMapping(path=(""))
     public @ResponseBody
     List<Session> getSessionsFromDay(@RequestParam String date) {
         if ("today".equals(date)) {
-            return sessionService.getSessionsFromToday();
+            return sessionsService.getSessionsFromToday();
         } else if ("yesterday".equals(date)) {
-            return sessionService.getSessionsFromYesterday();
+            return sessionsService.getSessionsFromYesterday();
         } else if (date != null && date.length() == 8) {
             try {
                 int year = Integer.parseInt(date.substring(0, 4));
                 int month = Integer.parseInt(date.substring(4, 6));
                 int dayOfMonth = Integer.parseInt(date.substring(6, 8));
-                return sessionService.getSessionsFromDay(year, month, dayOfMonth);
+                return sessionsService.getSessionsFromDay(year, month, dayOfMonth);
             } catch (NumberFormatException ex) {
                 return Collections.emptyList();
             }
@@ -61,19 +61,19 @@ public class SessionController {
         return authService.getAuthForSession(id);
     }
 
+    @GetMapping(path=("/{id}/downloads"))
+    public @ResponseBody
+    List<Download> getDownloads(@PathVariable String id) {
+        return downloadsService.getDownloadsForSession(id);
+    }
+
     @GetMapping(path=("/{id}/keyfingerprints"))
     public @ResponseBody List<KeyFingerprint> getKeyFingerprints(@PathVariable String id) {
         return keyFingerprintsService.getKeyFingerprintsForSession(id);
     }
 
     @GetMapping(path=("/{id}/params"))
-    public @ResponseBody Params getParams(@PathVariable String id) {
+    public @ResponseBody List<Params> getParams(@PathVariable String id) {
         return paramsService.getParamsForSession(id);
-    }
-
-    @GetMapping(path=("/{id}/downloads"))
-    public @ResponseBody
-    List<Download> getDownloads(@PathVariable String id) {
-        return downloadService.getDownloadsForSession(id);
     }
 }

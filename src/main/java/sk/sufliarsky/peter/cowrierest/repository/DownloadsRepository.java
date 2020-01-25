@@ -7,7 +7,7 @@ import sk.sufliarsky.peter.cowrierest.entity.Download;
 import java.util.List;
 
 @Repository
-public interface DownloadRepository extends JpaRepository<Download, Long> {
+public interface DownloadsRepository extends JpaRepository<Download, Long> {
 
     List<Download> findBySession(String sessionId);
 }
