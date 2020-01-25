@@ -20,10 +20,10 @@ public class Download {
     @Column(name="url")
     String url;
 
-    @Column(name="outfile")
+    @Column(name="outfile", nullable=false)
     String outfile;
 
-    @Column(name="shasum")
+    @Column(name="shasum", nullable=false)
     String shasum;
 
     public Long getId() {
