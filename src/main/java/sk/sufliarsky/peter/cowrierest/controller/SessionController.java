@@ -32,6 +32,9 @@ public class SessionController {
     @Autowired
     private SessionsService sessionsService;
 
+    @Autowired
+    private TTYLogService ttyLogService;
+
     @GetMapping(path=("/{id}"))
     public @ResponseBody Optional<Session> getSession(@PathVariable String id) {
         return sessionsService.getSession(id);
@@ -83,5 +86,10 @@ public class SessionController {
     @GetMapping(path=("/{id}/params"))
     public @ResponseBody List<Params> getParams(@PathVariable String id) {
         return paramsService.getParamsForSession(id);
+    }
+
+    @GetMapping(path=("/{id}/ttylog"))
+    public @ResponseBody List<TTYLog> getTTYLog(@PathVariable String id) {
+        return ttyLogService.getTTYLogForSession(id);
     }
 }
