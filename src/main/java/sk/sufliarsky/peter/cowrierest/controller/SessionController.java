@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping(path="/sessions")
 public class SessionController {
 
@@ -42,13 +42,12 @@ public class SessionController {
     private TTYLogService ttyLogService;
 
     @GetMapping(path=("/{id}"))
-    public @ResponseBody Optional<Session> getSession(@PathVariable String id) {
+    public Optional<Session> getSession(@PathVariable String id) {
         return sessionsService.getSession(id);
     }
 
     @GetMapping(path=(""))
-    public @ResponseBody
-    List<Session> getSessionsFromDay(@RequestParam String date) {
+    public List<Session> getSessionsFromDay(@RequestParam String date) {
         if ("today".equals(date)) {
             return sessionsService.getSessionsFromToday();
         } else if ("yesterday".equals(date)) {
@@ -69,43 +68,42 @@ public class SessionController {
     }
 
     @GetMapping(path=("/{id}/auth"))
-    public @ResponseBody List<Auth> getAuth(@PathVariable String id) {
+    public List<Auth> getAuth(@PathVariable String id) {
         return authService.getAuthForSession(id);
     }
 
     @GetMapping(path=("/{id}/downloads"))
-    public @ResponseBody
-    List<Download> getDownloads(@PathVariable String id) {
+    public List<Download> getDownloads(@PathVariable String id) {
         return downloadsService.getDownloadsForSession(id);
     }
 
     @GetMapping(path=("/{id}/input"))
-    public @ResponseBody List<Input> getInput(@PathVariable String id) {
+    public List<Input> getInput(@PathVariable String id) {
         return inputService.getInputForSession(id);
     }
 
     @GetMapping(path=("/{id}/ipforwards"))
-    public @ResponseBody List<IPForward> getIpForwards(@PathVariable String id) {
+    public List<IPForward> getIpForwards(@PathVariable String id) {
         return ipForwardsService.getIpForwardsForSession(id);
     }
 
     @GetMapping(path=("/{id}/ipforwardsdata"))
-    public @ResponseBody List<IPForwardData> getIpForwardsData(@PathVariable String id) {
+    public List<IPForwardData> getIpForwardsData(@PathVariable String id) {
         return ipForwardsDataService.getIpForwardsDataForSession(id);
     }
 
     @GetMapping(path=("/{id}/keyfingerprints"))
-    public @ResponseBody List<KeyFingerprint> getKeyFingerprints(@PathVariable String id) {
+    public List<KeyFingerprint> getKeyFingerprints(@PathVariable String id) {
         return keyFingerprintsService.getKeyFingerprintsForSession(id);
     }
 
     @GetMapping(path=("/{id}/params"))
-    public @ResponseBody List<Params> getParams(@PathVariable String id) {
+    public List<Params> getParams(@PathVariable String id) {
         return paramsService.getParamsForSession(id);
     }
 
     @GetMapping(path=("/{id}/ttylog"))
-    public @ResponseBody List<TTYLog> getTTYLog(@PathVariable String id) {
+    public List<TTYLog> getTTYLog(@PathVariable String id) {
         return ttyLogService.getTTYLogForSession(id);
     }
 }
