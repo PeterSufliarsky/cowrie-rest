@@ -1,12 +1,15 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import sk.sufliarsky.peter.cowrierest.serializer.SessionSerializer;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@JsonSerialize(using=SessionSerializer.class)
 @Table(name="sessions")
 public class Session {
 
