@@ -20,19 +20,12 @@ GET /sessions/5962f1d02874
 Sample response:
 ```
 {
-  "id":"5962f1d02874",
-  "startTime":"2019-11-08T20:12:15",
-  "endTime":"2019-11-08T20:12:17",
-  "sensor":{
-    "id":1,
-    "ip":"cowrie"
-  },
-  "ip":"127.0.0.1",
-  "termSize":null,
-  "client":{
-    "id":1414,
-    "version":"b'SSH-2.0-Go'"
-  }
+  "id":"c2a7c72a8d34",
+  "ip":"192.168.0.11",
+  "sensor":"cowrie",
+  "startTime":"2020-07-20T00:00:09",
+  "endTime":"2020-07-20T00:00:15",
+  "client":"SSH-2.0-libssh-0.6.3"
 }
 ```
 
