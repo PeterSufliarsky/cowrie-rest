@@ -1,9 +1,10 @@
 package sk.sufliarsky.peter.cowrierest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.sufliarsky.peter.cowrierest.entity.*;
+import sk.sufliarsky.peter.cowrierest.enums.ActivityEnum;
+import sk.sufliarsky.peter.cowrierest.enums.AuthResultEnum;
 import sk.sufliarsky.peter.cowrierest.service.*;
 
 import java.util.Collections;
@@ -47,17 +48,17 @@ public class SessionController {
     }
 
     @GetMapping(path=(""))
-    public List<Session> getSessionsFromDay(@RequestParam String date) {
+    public List<Session> getSessionsFromDay(@RequestParam String date, @RequestParam(defaultValue = "any") AuthResultEnum authResult, @RequestParam(defaultValue = "any") ActivityEnum activity) {
         if ("today".equals(date)) {
-            return sessionsService.getSessionsFromToday();
+            return sessionsService.getSessionsFromToday(authResult, activity);
         } else if ("yesterday".equals(date)) {
-            return sessionsService.getSessionsFromYesterday();
+            return sessionsService.getSessionsFromYesterday(authResult, activity);
         } else if (date != null && date.length() == 8) {
             try {
                 int year = Integer.parseInt(date.substring(0, 4));
                 int month = Integer.parseInt(date.substring(4, 6));
                 int dayOfMonth = Integer.parseInt(date.substring(6, 8));
-                return sessionsService.getSessionsFromDay(year, month, dayOfMonth);
+                return sessionsService.getSessionsFromDay(year, month, dayOfMonth, authResult, activity);
             } catch (NumberFormatException ex) {
                 return Collections.emptyList();
             }

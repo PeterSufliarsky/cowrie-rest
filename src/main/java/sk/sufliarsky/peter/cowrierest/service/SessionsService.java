@@ -3,11 +3,14 @@ package sk.sufliarsky.peter.cowrierest.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.sufliarsky.peter.cowrierest.entity.Session;
+import sk.sufliarsky.peter.cowrierest.enums.ActivityEnum;
+import sk.sufliarsky.peter.cowrierest.enums.AuthResultEnum;
 import sk.sufliarsky.peter.cowrierest.repository.SessionsRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,21 +24,43 @@ public class SessionsService {
         return sessionsRepository.findById(id);
     }
 
-    public List<Session> getSessionsFromDay(int year, int month, int dayOfMonth) {
+    public List<Session> getSessionsFromDay(int year, int month, int dayOfMonth, AuthResultEnum authResult, ActivityEnum activity) {
         LocalTime midnight = LocalTime.MIDNIGHT;
         LocalDate day = LocalDate.of(year, month, dayOfMonth);
-        return sessionsRepository.findFromDay(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+
+        // AuthResult.PASS
+        if (AuthResultEnum.PASS.equals(authResult)) {
+            if (ActivityEnum.INPUT.equals(activity)) {
+		return sessionsRepository.findFromDayWithInput(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+            } else if (ActivityEnum.IPFORWARD.equals(activity)) {
+		return sessionsRepository.findFromDayWithIPForward(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+            } else {
+                return sessionsRepository.findAuthenticatedFromDay(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+            }
+        // AuthResult.FAIL
+        } else if (AuthResultEnum.FAIL.equals(authResult)) {
+            return sessionsRepository.findNonAuthenticatedFromDay(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+        // AuthResult.ANY
+        } else {
+            if (ActivityEnum.INPUT.equals(activity)) {
+		return sessionsRepository.findFromDayWithInput(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+            } else if (ActivityEnum.IPFORWARD.equals(activity)) {
+		return sessionsRepository.findFromDayWithIPForward(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+            } else {
+		return sessionsRepository.findFromDay(LocalDateTime.of(day, midnight), LocalDateTime.of(day, midnight).plusDays(1));
+	    }
+        }
     }
 
-    public List<Session> getSessionsFromToday() {
-        LocalTime midnight = LocalTime.MIDNIGHT;
+    public List<Session> getSessionsFromToday(AuthResultEnum authResult, ActivityEnum activity) {
         LocalDate today = LocalDate.now();
-        return sessionsRepository.findFromDay(LocalDateTime.of(today, midnight), LocalDateTime.now());
+	
+	return getSessionsFromDay(today.getYear(), today.getMonthValue(), today.getDayOfMonth(), authResult, activity);
     }
 
-    public List<Session> getSessionsFromYesterday() {
-        LocalTime midnight = LocalTime.MIDNIGHT;
-        LocalDate today = LocalDate.now();
-        return sessionsRepository.findFromDay(LocalDateTime.of(today, midnight).minusDays(1), LocalDateTime.of(today, midnight));
+    public List<Session> getSessionsFromYesterday(AuthResultEnum authResult, ActivityEnum activity) {
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+
+        return getSessionsFromDay(yesterday.getYear(), yesterday.getMonthValue(), yesterday.getDayOfMonth(), authResult, activity);
     }
 }
