@@ -1,9 +1,12 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import sk.sufliarsky.peter.cowrierest.serializer.AuthSerializer;
 
 @Entity
+@JsonSerialize(using=AuthSerializer.class)
 @Table(name="auth")
 public class Auth {
 
