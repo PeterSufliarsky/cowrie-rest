@@ -22,9 +22,7 @@ public class SessionSerializer extends StdSerializer<Session> {
     @Override
     public void serialize(Session value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
-
         jgen.writeStringField("id", value.getId());
-
         jgen.writeStringField("ip", value.getIp());
 
         if (value.getSensor() != null) {

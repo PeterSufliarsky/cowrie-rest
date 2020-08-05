@@ -1,9 +1,13 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import sk.sufliarsky.peter.cowrierest.serializer.InputSerializer;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@JsonSerialize(using=InputSerializer.class)
 @Table(name="input")
 public class Input {
 
