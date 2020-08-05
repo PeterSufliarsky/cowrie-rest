@@ -9,6 +9,8 @@ import sk.sufliarsky.peter.cowrierest.enums.AuthResultEnum;
 import sk.sufliarsky.peter.cowrierest.service.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -52,8 +54,8 @@ public class SessionController {
     @GetMapping(path=(""))
     public List<Session> getSessions(
             @RequestParam(required = false) String date,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime startTime,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime endTime,
             @RequestParam(defaultValue = "any") AuthResultEnum authResult,
             @RequestParam(defaultValue = "any") ActivityEnum activity
     ) {
@@ -71,7 +73,10 @@ public class SessionController {
                 return Collections.emptyList();
             }
         } else if (startTime != null && endTime != null) {
-            return sessionsService.getSessionsFromTimeRange(startTime, endTime, authResult, activity);
+            ZoneId localTimeZone = ZoneId.systemDefault();
+            LocalDateTime startTimeLocal = startTime.withZoneSameInstant(localTimeZone).toLocalDateTime();
+            LocalDateTime endTimeLocal = endTime.withZoneSameInstant(localTimeZone).toLocalDateTime();
+            return sessionsService.getSessionsFromTimeRange(startTimeLocal, endTimeLocal, authResult, activity);
         } else {
             return Collections.emptyList();
         }
