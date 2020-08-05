@@ -1,12 +1,14 @@
 package sk.sufliarsky.peter.cowrierest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import sk.sufliarsky.peter.cowrierest.entity.*;
 import sk.sufliarsky.peter.cowrierest.enums.ActivityEnum;
 import sk.sufliarsky.peter.cowrierest.enums.AuthResultEnum;
 import sk.sufliarsky.peter.cowrierest.service.*;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +50,13 @@ public class SessionController {
     }
 
     @GetMapping(path=(""))
-    public List<Session> getSessionsFromDay(@RequestParam String date, @RequestParam(defaultValue = "any") AuthResultEnum authResult, @RequestParam(defaultValue = "any") ActivityEnum activity) {
+    public List<Session> getSessions(
+            @RequestParam(required = false) String date,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime,
+            @RequestParam(defaultValue = "any") AuthResultEnum authResult,
+            @RequestParam(defaultValue = "any") ActivityEnum activity
+    ) {
         if ("today".equals(date)) {
             return sessionsService.getSessionsFromToday(authResult, activity);
         } else if ("yesterday".equals(date)) {
@@ -62,10 +70,11 @@ public class SessionController {
             } catch (NumberFormatException ex) {
                 return Collections.emptyList();
             }
+        } else if (startTime != null && endTime != null) {
+            return sessionsService.getSessionsFromTimeRange(startTime, endTime, authResult, activity);
         } else {
             return Collections.emptyList();
         }
-
     }
 
     @GetMapping(path=("/{id}/auth"))

@@ -62,4 +62,29 @@ public class SessionsService {
 
         return getSessionsFromDay(yesterday.getYear(), yesterday.getMonthValue(), yesterday.getDayOfMonth(), authResult, activity);
     }
+
+    public List<Session> getSessionsFromTimeRange(LocalDateTime startTime, LocalDateTime endTime, AuthResultEnum authResult, ActivityEnum activity) {
+        // AuthResult.PASS
+        if (AuthResultEnum.PASS.equals(authResult)) {
+            if (ActivityEnum.INPUT.equals(activity)) {
+                return sessionsRepository.findFromTimeRangeWithInput(startTime, endTime);
+            } else if (ActivityEnum.IPFORWARD.equals(activity)) {
+                return sessionsRepository.findFromTimeRangeWithIPForward(startTime, endTime);
+            } else {
+                return sessionsRepository.findAuthenticatedFromTimeRange(startTime, endTime);
+            }
+            // AuthResult.FAIL
+        } else if (AuthResultEnum.FAIL.equals(authResult)) {
+            return sessionsRepository.findNonAuthenticatedFromTimeRange(startTime, endTime);
+            // AuthResult.ANY
+        } else {
+            if (ActivityEnum.INPUT.equals(activity)) {
+                return sessionsRepository.findFromTimeRangeWithInput(startTime, endTime);
+            } else if (ActivityEnum.IPFORWARD.equals(activity)) {
+                return sessionsRepository.findFromTimeRangeWithIPForward(startTime, endTime);
+            } else {
+                return sessionsRepository.findFromTimeRange(startTime, endTime);
+            }
+        }
+    }
 }
