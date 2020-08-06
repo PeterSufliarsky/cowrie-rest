@@ -1,9 +1,12 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import sk.sufliarsky.peter.cowrierest.serializer.IPForwardSerializer;
 
 @Entity
+@JsonSerialize(using=IPForwardSerializer.class)
 @Table(name="ipforwards")
 public class IPForward {
 

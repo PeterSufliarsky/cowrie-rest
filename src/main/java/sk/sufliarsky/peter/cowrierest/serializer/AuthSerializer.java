@@ -26,5 +26,4 @@ public class AuthSerializer extends StdSerializer<Auth> {
         jgen.writeStringField("success", value.getSuccess().toString());
         jgen.writeEndObject();
     }
-
 }

@@ -1,8 +1,11 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import javax.persistence.*;
+import sk.sufliarsky.peter.cowrierest.serializer.TTYLogSerializer;
 
 @Entity
+@JsonSerialize(using=TTYLogSerializer.class)
 @Table(name="ttylog")
 public class TTYLog {
 

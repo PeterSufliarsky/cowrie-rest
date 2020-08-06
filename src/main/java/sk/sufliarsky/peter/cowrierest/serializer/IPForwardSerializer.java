@@ -3,26 +3,26 @@ package sk.sufliarsky.peter.cowrierest.serializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import sk.sufliarsky.peter.cowrierest.entity.Input;
+import sk.sufliarsky.peter.cowrierest.entity.IPForward;
 
 import java.io.IOException;
 
-public class InputSerializer extends StdSerializer<Input> {
+public class IPForwardSerializer extends StdSerializer<IPForward> {
 
-    public InputSerializer() {
+    public IPForwardSerializer() {
         this(null);
     }
 
-    public InputSerializer(Class<Input> t) {
+    public IPForwardSerializer(Class<IPForward> t) {
         super(t);
     }
 
     @Override
-    public void serialize(Input value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    public void serialize(IPForward value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
         jgen.writeStringField("timestamp", value.getTimestamp().toString());
-        jgen.writeStringField("success", value.getSuccess().toString());
-        jgen.writeStringField("input", value.getInput());
+        jgen.writeStringField("dstIp", value.getDstIp());
+        jgen.writeStringField("dstPort", Integer.toString(value.getDstPort()));
         jgen.writeEndObject();
     }
 }

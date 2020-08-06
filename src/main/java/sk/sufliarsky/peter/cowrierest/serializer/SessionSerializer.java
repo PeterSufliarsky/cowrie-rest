@@ -51,5 +51,4 @@ public class SessionSerializer extends StdSerializer<Session> {
 
         jgen.writeEndObject();
     }
-
 }

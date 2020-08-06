@@ -1,9 +1,12 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import sk.sufliarsky.peter.cowrierest.serializer.DownloadSerializer;
 
 @Entity
+@JsonSerialize(using=DownloadSerializer.class)
 @Table(name="downloads")
 public class Download {
 
