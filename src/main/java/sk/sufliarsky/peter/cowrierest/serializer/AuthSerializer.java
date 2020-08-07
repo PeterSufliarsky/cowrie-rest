@@ -20,6 +20,7 @@ public class AuthSerializer extends StdSerializer<Auth> {
     @Override
     public void serialize(Auth value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
+        jgen.writeNumberField("id", value.getId());
         jgen.writeStringField("username", value.getUsername());
         jgen.writeStringField("password", value.getPassword());
         jgen.writeStringField("timestamp", value.getTimestamp().toString());

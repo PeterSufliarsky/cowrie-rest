@@ -20,6 +20,7 @@ public class DownloadSerializer extends StdSerializer<Download> {
     @Override
     public void serialize(Download value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
+        jgen.writeNumberField("id", value.getId());
         jgen.writeStringField("timestamp", value.getTimestamp().toString());
         jgen.writeStringField("url", value.getUrl());
         jgen.writeStringField("shasum", value.getShasum());

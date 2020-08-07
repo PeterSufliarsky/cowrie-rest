@@ -20,9 +20,10 @@ public class IPForwardDataSerializer extends StdSerializer<IPForwardData> {
     @Override
     public void serialize(IPForwardData value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
+        jgen.writeNumberField("id", value.getId());
         jgen.writeStringField("timestamp", value.getTimestamp().toString());
         jgen.writeStringField("dstIp", value.getDstIp());
-        jgen.writeStringField("dstPort", Integer.toString(value.getDstPort()));
+        jgen.writeNumberField("dstPort", value.getDstPort());
         jgen.writeStringField("data", value.getData());
         jgen.writeEndObject();
     }

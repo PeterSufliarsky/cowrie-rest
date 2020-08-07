@@ -20,9 +20,9 @@ public class TTYLogSerializer extends StdSerializer<TTYLog> {
     @Override
     public void serialize(TTYLog value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         jgen.writeStartObject();
-        jgen.writeStringField("id", Long.toString(value.getId()));
+        jgen.writeNumberField("id", value.getId());
         jgen.writeStringField("ttylog", value.getTtylog().substring(value.getTtylog().lastIndexOf('/') + 1));
-        jgen.writeStringField("size", Integer.toString(value.getSize()));
+        jgen.writeNumberField("size", value.getSize());
         jgen.writeEndObject();
     }
 }
