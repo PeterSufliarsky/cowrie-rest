@@ -25,6 +25,9 @@ public class DownloadsService {
     @Autowired
     private DownloadsRepository downloadsRepository;
 
+    @Value("${cowrie.path}")
+    private String cowriePath;
+
     @Value("${cowrie.downloads.path}")
     private String downloadsPath;
 
@@ -37,7 +40,7 @@ public class DownloadsService {
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-        File file = new File(downloadsPath + '/' + hash);
+        File file = new File(cowriePath + '/' + downloadsPath + '/' + hash);
         Path path = Paths.get(file.getAbsolutePath());
         ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
 

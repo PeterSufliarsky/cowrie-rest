@@ -26,16 +26,16 @@ public class SessionController {
     private DownloadsService downloadsService;
 
     @Autowired
-    InputService inputService;
+    private InputService inputService;
 
     @Autowired
-    IPForwardsService ipForwardsService;
+    private IPForwardsService ipForwardsService;
 
     @Autowired
-    IPForwardsDataService ipForwardsDataService;
+    private IPForwardsDataService ipForwardsDataService;
 
     @Autowired
-    KeyFingerprintsService keyFingerprintsService;
+    private KeyFingerprintsService keyFingerprintsService;
 
     @Autowired
     private ParamsService paramsService;
@@ -118,7 +118,7 @@ public class SessionController {
     }
 
     @GetMapping(path=("/{id}/ttylog"))
-    public List<TTYLog> getTTYLog(@PathVariable String id) {
+    public List<UnpackedTTYLog> getTTYLog(@PathVariable String id) {
         return ttyLogService.getTTYLogForSession(id);
     }
 }
