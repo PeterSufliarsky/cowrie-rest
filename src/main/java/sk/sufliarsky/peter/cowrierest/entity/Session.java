@@ -17,6 +17,15 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.AUTO)
     String id;
 
+    @Transient
+    Integer asnId;
+
+    @Transient
+    String asnName;
+
+    @Transient
+    String country;
+
     @Column(name="starttime", nullable = false)
     LocalDateTime startTime;
 
@@ -54,6 +63,30 @@ public class Session {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getAsnId() {
+        return asnId;
+    }
+
+    public void setAsnId(Integer asnId) {
+        this.asnId = asnId;
+    }
+
+    public String getAsnName() {
+        return asnName;
+    }
+
+    public void setAsnName(String asnName) {
+        this.asnName = asnName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public LocalDateTime getStartTime() {
