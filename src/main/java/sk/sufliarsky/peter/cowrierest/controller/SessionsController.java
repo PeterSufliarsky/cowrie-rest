@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/sessions")
-public class SessionController {
+public class SessionsController {
 
     @Autowired
     private AuthService authService;
