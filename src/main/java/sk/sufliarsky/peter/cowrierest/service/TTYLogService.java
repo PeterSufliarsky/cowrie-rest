@@ -42,7 +42,7 @@ public class TTYLogService {
             log.setDir(bytesToInt(packedData.readNBytes(4)));
             log.setSec(bytesToInt(packedData.readNBytes(4)));
             log.setUsec(bytesToInt(packedData.readNBytes(4)));
-            log.setData(new String(packedData.readNBytes(log.getLength())));
+            log.setData(String.valueOf(packedData.readNBytes(log.getLength())));
             result.add(log);
         }
 
