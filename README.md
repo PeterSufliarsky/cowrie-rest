@@ -1,3 +1,5 @@
+[![deepcode](https://www.deepcode.ai/api/gh/badge?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybTEiOiJnaCIsIm93bmVyMSI6IlBldGVyU3VmbGlhcnNreSIsInJlcG8xIjoiY293cmllLXJlc3QiLCJpbmNsdWRlTGludCI6ZmFsc2UsImF1dGhvcklkIjoyMzI3MSwiaWF0IjoxNjAxMzI4MzU3fQ.6xrRTADYIE720YTuJDlax6xYQyl4JfXZ5i8w-rQ4IEw)](https://www.deepcode.ai/app/gh/PeterSufliarsky/cowrie-rest/_/dashboard?utm_content=gh%2FPeterSufliarsky%2Fcowrie-rest)
+
 # Cowrie REST
 
 ## REST API serving data collected by the Cowrie honeypot  
