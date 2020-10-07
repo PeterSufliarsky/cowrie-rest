@@ -15,7 +15,7 @@ public class DownloadsController {
     @Autowired
     private DownloadsService downloadsService;
 
-    @GetMapping(path=("/{hash}"))
+    @GetMapping(path=("/{hash:[a-fA-F0-9]{64}}"))
     public ResponseEntity<Resource> getDownload(@PathVariable String hash) throws IOException {
         return downloadsService.getDownloadedFile(hash);
     }
