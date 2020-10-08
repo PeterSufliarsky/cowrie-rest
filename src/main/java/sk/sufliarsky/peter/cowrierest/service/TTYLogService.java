@@ -8,6 +8,7 @@ import sk.sufliarsky.peter.cowrierest.entity.UnpackedTTYLog;
 import sk.sufliarsky.peter.cowrierest.repository.TTYLogRepository;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,7 +43,7 @@ public class TTYLogService {
             log.setDir(bytesToInt(packedData.readNBytes(4)));
             log.setSec(bytesToInt(packedData.readNBytes(4)));
             log.setUsec(bytesToInt(packedData.readNBytes(4)));
-            log.setData(String.valueOf(packedData.readNBytes(log.getLength())));
+            log.setData(new String(packedData.readNBytes(log.getLength()), StandardCharsets.UTF_8));
             result.add(log);
         }
 
