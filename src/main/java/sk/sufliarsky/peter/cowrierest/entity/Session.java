@@ -32,7 +32,7 @@ public class Session {
     @Column(name="endtime")
     LocalDateTime endTime;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="sensor", nullable = false)
     Sensor sensor;
 
@@ -42,7 +42,7 @@ public class Session {
     @Column(name="termsize")
     String termSize;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="client")
     @NotFound(action = NotFoundAction.IGNORE)
     Client client;
