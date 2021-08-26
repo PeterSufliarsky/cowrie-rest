@@ -1,6 +1,3 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/56f4826f4e3941259ebd868bd847074d)](https://app.codacy.com/gh/PeterSufliarsky/cowrie-rest?utm_source=github.com&utm_medium=referral&utm_content=PeterSufliarsky/cowrie-rest&utm_campaign=Badge_Grade_Settings)
-[![deepcode](https://www.deepcode.ai/api/gh/badge?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybTEiOiJnaCIsIm93bmVyMSI6IlBldGVyU3VmbGlhcnNreSIsInJlcG8xIjoiY293cmllLXJlc3QiLCJpbmNsdWRlTGludCI6ZmFsc2UsImF1dGhvcklkIjoyMzI3MSwiaWF0IjoxNjA3MjAzNTUxfQ.jcJHS0pqPlVz7JG6MdL1ullDqUyn-nVoPyG2QJD2o8U)](https://www.deepcode.ai/app/gh/PeterSufliarsky/cowrie-rest/_/dashboard?utm_content=gh%2FPeterSufliarsky%2Fcowrie-rest)
-
 # Cowrie REST
 
 ## REST API serving data collected by the Cowrie honeypot  
