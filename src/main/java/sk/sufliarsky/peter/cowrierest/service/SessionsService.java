@@ -34,7 +34,7 @@ public class SessionsService {
         // Add ASN information from the GeoIP database
         if (geoLite2AsnEnabled) {
             for (Session s: sessions) {
-                Integer asnId = geoIpService.getAsnId(s.getIp());
+                Long asnId = geoIpService.getAsnId(s.getIp());
                 String asnName = geoIpService.getAsnName(s.getIp());
                 s.setAsnId(asnId);
                 s.setAsnName(asnName);

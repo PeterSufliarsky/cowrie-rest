@@ -38,7 +38,7 @@ public class GeoIpService {
         }
     }
 
-    public Integer getAsnId(String ipAddress) {
+    public Long getAsnId(String ipAddress) {
         try {
             InetAddress inetAddress = InetAddress.getByName(ipAddress);
             AsnResponse response = asnReader.asn(inetAddress);

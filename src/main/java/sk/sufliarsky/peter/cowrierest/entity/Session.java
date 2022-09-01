@@ -18,7 +18,7 @@ public class Session {
     String id;
 
     @Transient
-    Integer asnId;
+    Long asnId;
 
     @Transient
     String asnName;
@@ -65,11 +65,11 @@ public class Session {
         this.id = id;
     }
 
-    public Integer getAsnId() {
+    public Long getAsnId() {
         return asnId;
     }
 
-    public void setAsnId(Integer asnId) {
+    public void setAsnId(Long asnId) {
         this.asnId = asnId;
     }
 
