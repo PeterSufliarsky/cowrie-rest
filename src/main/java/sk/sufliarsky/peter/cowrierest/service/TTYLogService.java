@@ -21,8 +21,8 @@ public class TTYLogService {
     @Autowired
     TTYLogRepository ttyLogRepository;
 
-    @Value("${cowrie.path}")
-    private String cowriePath;
+    @Value("${cowrie.ttylog.path}")
+        private String ttyLogPath;
 
     private int bytesToInt(byte[] bytes) {
         return ((bytes[0] & 0xFF)
@@ -58,7 +58,7 @@ public class TTYLogService {
             String ttyLogRelPath = ttyLog.getTtylog();
             String hash = ttyLogRelPath.substring(ttyLogRelPath.lastIndexOf("/") + 1);
             try {
-                File file = new File(cowriePath + '/' + ttyLogRelPath);
+                File file = new File(ttyLogPath + "/" + hash);
                 Path path = Paths.get(file.getAbsolutePath());
                 DataInputStream packedData = new DataInputStream(new ByteArrayInputStream(Files.readAllBytes(path)));
                 List<UnpackedTTYLog> log = parsePackedTTYLog(hash, packedData);
@@ -66,6 +66,7 @@ public class TTYLogService {
             } catch (IOException ex) {
                 // TODO
                 System.out.println("An error occured processing ttylog " + hash);
+                ex.printStackTrace();
             }
         });
 
