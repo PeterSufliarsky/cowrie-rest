@@ -45,7 +45,11 @@ public class SessionsService {
         if (geoLite2CountriesEnabled) {
             for (Session s: sessions) {
                 Country country = geoIpService.getCountryInformation(s.getIp());
-                s.setCountry(country.getIsoCode());
+		if (country == null || country.getIsoCode() == null) {
+			s.setCountry("unknown");
+		} else {
+			s.setCountry(country.getIsoCode());
+		}
             }
         }
     }
