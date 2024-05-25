@@ -1,7 +1,7 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import sk.sufliarsky.peter.cowrierest.serializer.AuthSerializer;
 

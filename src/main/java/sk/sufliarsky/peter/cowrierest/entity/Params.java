@@ -1,6 +1,6 @@
 package sk.sufliarsky.peter.cowrierest.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="params")
