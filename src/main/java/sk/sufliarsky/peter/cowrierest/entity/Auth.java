@@ -3,6 +3,8 @@ package sk.sufliarsky.peter.cowrierest.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+import org.hibernate.type.NumericBooleanConverter;
 import sk.sufliarsky.peter.cowrierest.serializer.AuthSerializer;
 
 @Entity
@@ -18,6 +20,7 @@ public class Auth {
     String session;
 
     @Column(name="success")
+    @Convert(converter = NumericBooleanConverter.class)
     Boolean success;
 
     @Column(name="username")
