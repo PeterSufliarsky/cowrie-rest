@@ -50,11 +50,7 @@ public class SessionSerializer extends StdSerializer<Session> {
         }
 
         if (value.getClient() != null) {
-            Pattern pattern = Pattern.compile("b'(.*?)'");
-            Matcher matcher = pattern.matcher(value.getClient().getVersion());
-            if (matcher.find()) {
-                jgen.writeStringField("client", matcher.group(1));
-            }
+            jgen.writeStringField("client", value.getClient().getVersion());
         }
 
         if (value.getTermSize() != null) {
